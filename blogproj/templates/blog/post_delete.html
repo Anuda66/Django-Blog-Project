@@ -1,0 +1,27 @@
+{% extends 'partial/base.html'%}
+{% load crispy_forms_tags %}
+{% block title %}post delete Page{% endblock %}
+{% block content %}
+<div class="container"  >
+    <div class = 'row mt-5 pt-5'>
+        <div class="clo-md-5 offset-md-4">
+            <div class="card mx-6 my-3 shadow" >
+                <div class="card-body" style="width: 25rem;">
+                    <h4> Alert  </h4>
+                    <hr>
+                    <div class="alert alert-danger" role="alert">
+                        <center>
+                            Do you want delete?
+                        </center>                       
+                    </div>                                       
+                    <form method="POST">
+                        {% csrf_token %}
+                        <a class="btn btn-primary mx-2 float-right btn-sm" href="{% url 'blog_post_details' post.pk %}">Cancel</a>
+                        <input class="btn btn-primary btn-sm mx-2 float-right" type="submit" value="Confirm">
+                    </form>                   
+                </div>                    
+            </div> 
+        </div>        
+    </div>
+</div>
+{% endblock %}

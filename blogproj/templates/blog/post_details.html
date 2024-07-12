@@ -1,0 +1,52 @@
+{% extends 'partial/base.html'%}
+{% load crispy_forms_tags %}
+{% block title %}post details Page{% endblock %}
+{% block content %}
+<div class="container"  >
+    <div class = 'row mt-5 pt-3'  >
+        <div class="clo-md-8 offset-md-2" >
+            <div class="card my-3 shadow" >
+                <div class="card-body"> 
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="col-md-4">
+                                <img class="img-thumbnail" src="{{ post.author.profilemodel.image.url }}" alt="profile-image">
+                            </div>          
+                        </div> 
+                        <div class="col-md-12">
+                            <small>{{ post.date_created }}</small>
+                            {% if post.author == request.user  %}
+                            <span><a class="btn btn-danger mx-2 float-right btn-sm" href="{% url 'blog-post-delete' post.id %}">Delete</a> </span>
+                            <span><a class="btn btn-primary mx-2 float-right btn-sm" href="{% url 'blog_post_edit' post.id %}">Edit</a> </span>                 
+                            {% endif %}
+                            <hr>
+                            <h4>{{ post.title }}</h4>
+                            <p>
+                                {{ post.content }}
+                            </p>
+                            <hr>
+                        </div>
+                        <!-- Comment section -->
+                        <p class="mt-2 mb-1">
+                            <a  data-toggle="collapse" href="#collapseExample" 
+                                role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Comment: {{ post.comment_count }}
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div style="height: 250px; width: 700px; overflow-y: scroll;" class="card card-body">
+                                {% for Comment in post.comment %}
+                                <p class="text-justyfy">
+                                    {{ comment.content }}
+                                </p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                      Ccccc  
+                    </div>         
+                </div>
+            </div>         
+        </div>
+    </div>
+</div>
+{% endblock %}
